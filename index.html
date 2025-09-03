@@ -1,0 +1,405 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Giới thiệu | Tên của bạn</title>
+  <meta name="description" content="Trang giới thiệu cá nhân, kỹ năng, kinh nghiệm và dự án tiêu biểu." />
+  <meta name="color-scheme" content="light dark" />
+  <style>
+    :root{
+      --bg: #0b0c10;
+      --panel: #111318;
+      --muted:#8b94a7;
+      --text:#e9edf5;
+      --brand:#6dd5fa;
+      --brand-2:#2980b9;
+      --ok:#19c37d;
+      --warn:#ffb020;
+      --danger:#ef4444;
+      --ring: rgba(109,213,250,.35);
+      --shadow: 0 10px 30px rgba(0,0,0,.25);
+    }
+    :root.light{
+      --bg:#f7f8fb; --panel:#ffffff; --text:#0f172a; --muted:#5b6475;
+      --brand:#2563eb; --brand-2:#0ea5e9; --ring: rgba(37,99,235,.2);
+      --shadow: 0 8px 24px rgba(15,23,42,.08);
+    }
+    html{scroll-behavior:smooth}
+    body{margin:0; font:16px/1.6 ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto; background:var(--bg); color:var(--text)}
+    .container{max-width:1100px; margin-inline:auto; padding:0 20px}
+    header.nav{position:sticky; top:0; z-index:50; background:color-mix(in oklab, var(--bg), transparent 20%); backdrop-filter: blur(8px); border-bottom:1px solid color-mix(in oklab, var(--muted), transparent 70%)}
+    .nav-inner{display:flex; align-items:center; justify-content:space-between; gap:12px; height:64px}
+    .brand{display:flex; align-items:center; gap:10px; font-weight:800}
+    .brand .logo{width:28px; height:28px; border-radius:10px; background:linear-gradient(135deg, var(--brand), var(--brand-2)); box-shadow:var(--shadow)}
+    .nav-links{display:flex; gap:14px; align-items:center}
+    .nav-links a{padding:8px 10px; border-radius:10px; text-decoration:none; color:var(--text); opacity:.9}
+    .nav-links a:hover{background:color-mix(in oklab, var(--panel), transparent 60%)}
+    .btn{display:inline-flex; align-items:center; gap:8px; padding:10px 14px; background:linear-gradient(135deg, var(--brand), var(--brand-2)); color:white; border:none; border-radius:14px; font-weight:700; text-decoration:none; box-shadow:var(--shadow)}
+    .btn.ghost{background:transparent; color:var(--text); border:1px solid color-mix(in oklab, var(--brand), transparent 60%)}
+    .wrap{padding-block:40px}
+
+    /* Hero */
+    .hero{display:grid; grid-template-columns:1.15fr .85fr; gap:28px; align-items:center; padding-block:36px}
+    .hero-card{background:var(--panel); padding:28px; border-radius:22px; box-shadow:var(--shadow); border:1px solid color-mix(in oklab, var(--brand), transparent 80%)}
+    .hero h1{font-size:clamp(28px, 4vw, 44px); line-height:1.15; margin:0 0 12px}
+    .hero p{color:var(--muted); margin:0 0 18px}
+    .hero .badges{display:flex; gap:10px; flex-wrap:wrap}
+    .chip{padding:6px 10px; border-radius:999px; background:color-mix(in oklab, var(--brand), transparent 85%); border:1px solid color-mix(in oklab, var(--brand), transparent 60%); font-size:13px}
+    .profile{background:var(--panel); padding:18px; border-radius:22px; box-shadow:var(--shadow); border:1px solid color-mix(in oklab, var(--brand), transparent 80%)}
+    .profile .card{aspect-ratio:1/1; border-radius:18px; background:linear-gradient(180deg, color-mix(in oklab, var(--brand), transparent 70%), transparent), url('https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=1200&auto=format&fit=crop') center/cover no-repeat}
+
+    /* Section */
+    section{padding-block:34px}
+    section h2{font-size:clamp(22px, 3vw, 30px); margin:0 0 16px}
+    .section-card{background:var(--panel); padding:22px; border-radius:18px; box-shadow:var(--shadow); border:1px solid color-mix(in oklab, var(--brand), transparent 80%)}
+
+    /* Grid */
+    .grid{display:grid; gap:16px}
+    .grid.cols-2{grid-template-columns:repeat(2,1fr)}
+    .grid.cols-3{grid-template-columns:repeat(3,1fr)}
+
+    /* About */
+    .about p{margin:0; color:var(--muted)}
+
+    /* Skills */
+    .skills .list{display:flex; flex-wrap:wrap; gap:10px}
+
+    /* Experience / Timeline */
+    .timeline{position:relative; margin-left:8px}
+    .timeline:before{content:""; position:absolute; left:10px; top:0; bottom:0; width:2px; background:color-mix(in oklab, var(--brand), transparent 70%)}
+    .tl-item{position:relative; padding-left:28px; margin:14px 0}
+    .tl-item:before{content:""; position:absolute; width:10px; height:10px; left:6px; top:.6em; background:linear-gradient(135deg, var(--brand), var(--brand-2)); border-radius:50%; box-shadow:0 0 0 4px var(--ring)}
+    .tl-item h3{margin:0 0 4px; font-size:16px}
+    .tl-item p{margin:0; color:var(--muted)}
+
+    /* Projects */
+    .filters{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:12px}
+    .filters .chip{cursor:pointer; user-select:none}
+    .project{display:flex; flex-direction:column; background:var(--panel); border:1px solid color-mix(in oklab, var(--brand), transparent 80%); border-radius:16px; overflow:hidden; box-shadow:var(--shadow)}
+    .project .thumb{aspect-ratio:16/9; background:#0f172a url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1200&auto=format&fit=crop') center/cover no-repeat}
+    .project .meta{padding:14px}
+    .project h3{margin:0 0 6px; font-size:18px}
+    .project p{margin:0 0 8px; color:var(--muted)}
+    .tags{display:flex; gap:6px; flex-wrap:wrap}
+    .tag{font-size:12px; padding:4px 8px; border-radius:999px; background:color-mix(in oklab, var(--panel), transparent 40%); border:1px solid color-mix(in oklab, var(--brand), transparent 70%)}
+
+    /* Contact */
+    form{display:grid; gap:12px}
+    input, textarea{width:100%; padding:12px 14px; border-radius:12px; background:color-mix(in oklab, var(--panel), transparent 10%); border:1px solid color-mix(in oklab, var(--brand), transparent 70%); color:var(--text)}
+    input:focus, textarea:focus{outline:2px solid var(--ring); border-color:transparent}
+
+    /* Footer */
+    footer{padding:24px 0; color:var(--muted); border-top:1px solid color-mix(in oklab, var(--muted), transparent 70%)}
+    .social{display:flex; gap:10px}
+
+    /* Utilities */
+    .muted{color:var(--muted)}
+    .row{display:flex; gap:12px; flex-wrap:wrap; align-items:center}
+    .right{margin-left:auto}
+    .hidden{display:none !important}
+
+    /* Responsive */
+    @media (max-width: 900px){
+      .hero{grid-template-columns:1fr}
+      .grid.cols-2{grid-template-columns:1fr}
+      .grid.cols-3{grid-template-columns:1fr}
+      .nav-links{display:none}
+      .nav-links.open{display:flex; flex-direction:column; align-items:flex-start; padding:10px 0}
+    }
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <div class="container nav-inner">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <span>TenBan.dev</span>
+      </div>
+      <nav class="nav-links" id="navLinks">
+        <a href="#home">Trang chủ</a>
+        <a href="#about">Giới thiệu</a>
+        <a href="#skills">Kỹ năng</a>
+        <a href="#experience">Kinh nghiệm</a>
+        <a href="#projects">Dự án</a>
+        <a href="#contact">Liên hệ</a>
+      </nav>
+      <div class="row right">
+        <button class="btn ghost" id="themeBtn" aria-label="Đổi theme">🌓</button>
+        <button class="btn ghost" id="menuBtn" aria-label="Mở menu">☰</button>
+        <a class="btn" href="#contact">Liên hệ ngay</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="home" class="wrap container">
+    <section class="hero" aria-label="Phần mở đầu">
+      <div class="hero-card">
+        <div class="badges" style="margin-bottom:10px">
+          <span class="chip">Sẵn sàng nhận dự án</span>
+          <span class="chip">Freelance / Part-time</span>
+        </div>
+        <h1>Xin chào, mình là <span style="color:var(--brand)">Tên của bạn</span> 👋</h1>
+        <p>Lập trình viên Frontend/Full‑stack, yêu thích UX tối giản & hiệu năng. Mình xây dựng web/app đẹp, nhanh và dễ mở rộng.</p>
+        <div class="row">
+          <a class="btn" href="mailto:email@domain.com">Gửi email</a>
+          <a class="btn ghost" href="./cv.pdf" download>⬇ Tải CV</a>
+        </div>
+      </div>
+      <aside class="profile" aria-label="Ảnh hồ sơ">
+        <div class="card" title="Ảnh đại diện" aria-hidden="true"></div>
+      </aside>
+    </section>
+
+    <section id="about" class="about">
+      <h2>Giới thiệu</h2>
+      <div class="section-card">
+        <p>Mình có <strong>3+ năm</strong> xây dựng sản phẩm số: landing page, dashboard nội bộ, app thương mại điện tử. Quan tâm đến <em>khả năng truy cập (a11y)</em>, <em>SEO</em> và <em>Core Web Vitals</em>. Ngoài giờ, mình thích nghiên cứu AI ứng dụng và tối ưu hoá quy trình CI/CD.</p>
+      </div>
+    </section>
+
+    <section id="skills" class="skills">
+      <h2>Kỹ năng</h2>
+      <div class="section-card">
+        <div class="list">
+          <span class="chip">HTML5</span>
+          <span class="chip">CSS3 / Tailwind</span>
+          <span class="chip">JavaScript / TypeScript</span>
+          <span class="chip">React / Next.js</span>
+          <span class="chip">Node.js / Express</span>
+          <span class="chip">REST / GraphQL</span>
+          <span class="chip">PostgreSQL / MongoDB</span>
+          <span class="chip">Docker / CI-CD</span>
+          <span class="chip">Git / GitHub Actions</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience">
+      <h2>Kinh nghiệm</h2>
+      <div class="section-card timeline">
+        <div class="tl-item">
+          <h3>Frontend Engineer — Công ty ABC <span class="muted">(2023—nay)</span></h3>
+          <p>Xây dựng hệ thống design system, tối ưu TTI -35%, SEO +45% traffic tự nhiên.</p>
+        </div>
+        <div class="tl-item">
+          <h3>Full‑stack Developer — Startup XYZ <span class="muted">(2021—2023)</span></h3>
+          <p>Thiết kế kiến trúc microservices, triển khai CI/CD, time-to-release giảm từ 2 tuần xuống 2 ngày.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="row" style="justify-content:space-between; align-items:flex-end">
+        <h2 style="margin:0">Dự án tiêu biểu</h2>
+        <div class="filters" aria-label="Bộ lọc dự án">
+          <span class="chip active" data-filter="all">Tất cả</span>
+          <span class="chip" data-filter="web">Web</span>
+          <span class="chip" data-filter="mobile">Mobile</span>
+          <span class="chip" data-filter="ai">AI</span>
+          <span class="chip" data-filter="iot">IoT</span>
+        </div>
+      </div>
+      <div class="grid cols-3" id="projectGrid">
+        <!-- Project card template -->
+        <article class="project" data-cat="web">
+          <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1529101091764-c3526daf38fe?q=80&w=1200&auto=format&fit=crop')"></div>
+          <div class="meta">
+            <h3>Landing Page Sự kiện</h3>
+            <p>Tối ưu điểm Lighthouse 98/100, truy cập 50k/ngày.</p>
+            <div class="tags">
+              <span class="tag">Next.js</span>
+              <span class="tag">Tailwind</span>
+              <span class="tag">Vercel</span>
+            </div>
+            <div class="row" style="margin-top:10px">
+              <a class="btn" href="#" target="_blank" rel="noopener">Xem demo</a>
+              <a class="btn ghost" href="#" target="_blank" rel="noopener">Source code</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="project" data-cat="mobile">
+          <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?q=80&w=1200&auto=format&fit=crop')"></div>
+          <div class="meta">
+            <h3>Ứng dụng To‑do Offline</h3>
+            <p>Hoạt động không mạng, đồng bộ khi online, 30k MAU.</p>
+            <div class="tags">
+              <span class="tag">PWA</span>
+              <span class="tag">IndexedDB</span>
+              <span class="tag">Workbox</span>
+            </div>
+            <div class="row" style="margin-top:10px">
+              <a class="btn" href="#" target="_blank" rel="noopener">Xem demo</a>
+              <a class="btn ghost" href="#" target="_blank" rel="noopener">Source code</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="project" data-cat="ai">
+          <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1555255707-c07966088b7b?q=80&w=1200&auto=format&fit=crop')"></div>
+          <div class="meta">
+            <h3>Chatbot Hỗ trợ CSKH</h3>
+            <p>Tự động hoá 40% ticket, giảm SLA xuống 5 phút.</p>
+            <div class="tags">
+              <span class="tag">Node.js</span>
+              <span class="tag">LLM API</span>
+              <span class="tag">RAG</span>
+            </div>
+            <div class="row" style="margin-top:10px">
+              <a class="btn" href="#" target="_blank" rel="noopener">Dùng thử</a>
+              <a class="btn ghost" href="#" target="_blank" rel="noopener">Tài liệu</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="project" data-cat="web">
+          <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1200&auto=format&fit=crop')"></div>
+          <div class="meta">
+            <h3>Dashboard Phân tích</h3>
+            <p>Realtime chart & role‑based access, NPS 72.</p>
+            <div class="tags">
+              <span class="tag">React</span>
+              <span class="tag">WebSocket</span>
+              <span class="tag">RBAC</span>
+            </div>
+            <div class="row" style="margin-top:10px">
+              <a class="btn" href="#" target="_blank" rel="noopener">Xem dashboard</a>
+              <a class="btn ghost" href="#" target="_blank" rel="noopener">Repo</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="project" data-cat="iot">
+          <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1531297484001-80022131f5a1?q=80&w=1200&auto=format&fit=crop')"></div>
+          <div class="meta">
+            <h3>Giám sát Nhiệt độ</h3>
+            <p>Cảnh báo qua Telegram khi vượt ngưỡng.</p>
+            <div class="tags">
+              <span class="tag">ESP32</span>
+              <span class="tag">MQTT</span>
+              <span class="tag">Grafana</span>
+            </div>
+            <div class="row" style="margin-top:10px">
+              <a class="btn" href="#" target="_blank" rel="noopener">Xem đồ thị</a>
+              <a class="btn ghost" href="#" target="_blank" rel="noopener">Hướng dẫn</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="project" data-cat="web">
+          <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1485217988980-11786ced9454?q=80&w=1200&auto=format&fit=crop')"></div>
+          <div class="meta">
+            <h3>Blog Kỹ thuật</h3>
+            <p>Viết về tối ưu hiệu năng và bảo trì hệ thống.</p>
+            <div class="tags">
+              <span class="tag">Astro</span>
+              <span class="tag">MDX</span>
+              <span class="tag">SEO</span>
+            </div>
+            <div class="row" style="margin-top:10px">
+              <a class="btn" href="#" target="_blank" rel="noopener">Đọc bài</a>
+              <a class="btn ghost" href="#" target="_blank" rel="noopener">Mã nguồn</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2>Liên hệ</h2>
+      <div class="grid cols-2">
+        <div class="section-card">
+          <form action="https://formspree.io/f/your-id" method="POST">
+            <input type="text" name="name" placeholder="Họ tên" required />
+            <input type="email" name="email" placeholder="Email" required />
+            <textarea name="message" rows="5" placeholder="Lời nhắn..." required></textarea>
+            <button class="btn" type="submit">Gửi</button>
+          </form>
+        </div>
+        <div class="section-card">
+          <p class="muted">Hoặc kết nối qua:</p>
+          <div class="social" aria-label="Mạng xã hội">
+            <a class="btn ghost" href="https://github.com/yourname" target="_blank" rel="noopener">GitHub</a>
+            <a class="btn ghost" href="https://www.linkedin.com/in/yourname" target="_blank" rel="noopener">LinkedIn</a>
+            <a class="btn ghost" href="https://facebook.com/yourname" target="_blank" rel="noopener">Facebook</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section aria-label="FAQ">
+      <h2>Hỏi đáp nhanh</h2>
+      <div class="grid cols-2">
+        <div class="section-card">
+          <h3 style="margin-top:0">Phong cách làm việc?</h3>
+          <p class="muted">Ưu tiên rõ ràng, viết code sạch, CI chạy xanh, release nhỏ nhưng thường xuyên.</p>
+        </div>
+        <div class="section-card">
+          <h3 style="margin-top:0">Công nghệ yêu thích?</h3>
+          <p class="muted">React + TypeScript, Astro cho content, và tôn trọng web tiêu chuẩn.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container row" style="justify-content:space-between">
+      <span>© <span id="y"></span> Tên của bạn</span>
+      <a class="muted" href="#home">↑ Lên đầu trang</a>
+    </div>
+  </footer>
+
+  <script>
+    // Theme toggle (light/dark) with preference persistence
+    const $html = document.documentElement;
+    const STORAGE_KEY = 'pref-theme';
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if(saved === 'light') $html.classList.add('light');
+    else if(!saved && window.matchMedia('(prefers-color-scheme: light)').matches){
+      $html.classList.add('light');
+    }
+    document.getElementById('themeBtn').addEventListener('click',()=>{
+      $html.classList.toggle('light');
+      localStorage.setItem(STORAGE_KEY, $html.classList.contains('light') ? 'light' : 'dark');
+    });
+
+    // Mobile menu toggle
+    document.getElementById('menuBtn').addEventListener('click',()=>{
+      document.getElementById('navLinks').classList.toggle('open');
+    });
+
+    // Project filters
+    const chips = document.querySelectorAll('.filters .chip');
+    const cards = document.querySelectorAll('.project');
+    chips.forEach(c=>c.addEventListener('click',()=>{
+      chips.forEach(x=>x.classList.remove('active'));
+      c.classList.add('active');
+      const cat = c.dataset.filter;
+      cards.forEach(card=>{
+        const show = cat==='all' || card.dataset.cat===cat;
+        card.style.display = show ? 'flex' : 'none';
+      });
+    }));
+
+    // Footer year
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+
+  <!-- SEO structured data (update content cho phù hợp) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Tên của bạn",
+    "url": "https://your-domain.com",
+    "jobTitle": "Frontend / Full-stack Developer",
+    "email": "mailto:email@domain.com",
+    "sameAs": [
+      "https://github.com/yourname",
+      "https://www.linkedin.com/in/yourname"
+    ]
+  }
+  </script>
+</body>
+</html>
